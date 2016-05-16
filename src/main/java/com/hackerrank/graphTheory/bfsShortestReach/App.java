@@ -1,4 +1,4 @@
-package com.hackerrank;
+package com.hackerrank.graphTheory.bfsShortestReach;
 
 import java.util.*;
 
@@ -30,7 +30,6 @@ public class App {
                 toVertex.getNeighbors().add(fromVertex);
             }
 
-
             final Integer find = Integer.valueOf(scanner.nextLine().trim());
             final Map<Integer, Integer> shortest = graph.findShortest(find, new HashMap<>(), new LinkedList<>());
 
@@ -46,67 +45,4 @@ public class App {
         }
     }
 
-}
-
-class Graph {
-
-    private Map<Integer, Vertex> vertices = new HashMap<>();
-
-    public void add(int data) {
-        vertices.put(data, new Vertex(data));
-    }
-
-    public Map<Integer, Vertex> getVertices() {
-        return vertices;
-    }
-
-    public Map<Integer, Integer> findShortest(Integer current, Map<Integer, Integer> list, Queue<Integer> queue) {
-        list.put(current, 0);
-        queue.add(current);
-        return fsLoop(queue.peek(), list, queue);
-    }
-
-    private Map<Integer, Integer> fsLoop(Integer current, Map<Integer, Integer> list, Queue<Integer> queue) {
-        queue.remove();
-        vertices
-                .get(current)
-                .getNeighbors()
-                .stream()
-                .forEach(vertex -> {
-                    if (!list.containsKey(vertex.getData())) {
-                        list.put(vertex.getData(), list.get(current) + 6);
-                        queue.add(vertex.getData());
-                    }
-                });
-        if (!queue.isEmpty()) fsLoop(queue.peek(), list, queue);
-        return list;
-    }
-
-
-}
-
-class Vertex {
-
-    private List<Vertex> neighbors = new ArrayList<>();
-    private int data;
-
-    public Vertex(int data) {
-        this.data = data;
-    }
-
-    public List<Vertex> getNeighbors() {
-        return neighbors;
-    }
-
-    public void setNeighbors(List<Vertex> neighbors) {
-        this.neighbors = neighbors;
-    }
-
-    public int getData() {
-        return data;
-    }
-
-    public void setData(int data) {
-        this.data = data;
-    }
 }
