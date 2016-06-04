@@ -1,4 +1,4 @@
-package com.hackerrank.implementation.serviceLane;
+package com.hackerrank.implementation;
 
 import java.util.Scanner;
 
